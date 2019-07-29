@@ -1,4 +1,4 @@
-##1. Create a HashMap class
+# 1. Create a HashMap class
 
 Print your hash map and notice the length and items
 that are hashed in your hash map. Have you hashed all
@@ -21,7 +21,7 @@ hashed all the above items? Explain your answer.
 The capacity is not 24 because the original was 8
 which gets multilied by 3.
 
-##2. WhatDoesThisDo
+# 2. WhatDoesThisDo
 
 The output of:
 
@@ -33,7 +33,7 @@ console.log(map2.get(str3));
 
 Because the first has will insert a 20 into the key 'Hello World.' and then replace it with 10 and the second hash with insert a 10 into the key 'Hello World.' and place it with 10.
 
-##3. Demonstrate understanding of Hash maps
+# 3. Demonstrate understanding of Hash maps
 
 1) Show your hash map after the insertion of keys 10, 22, 31, 4, 15, 28, 17, 88, 59 into a hash map of length m = 11 using open addressing and a hash function k mod m.
 
