@@ -13,13 +13,24 @@ class SCHashMap {
     this._deleted = 0;
   }
 
-  get(key) {
+  get(item) {
     const index = this._findSlot(key);
     if (this._hashTable[index] === undefined) {
       throw new Error('Key error');
     }
-    return this._hashTable[index].value;
+    if (this._hashTable[index].value === item) {
+      return this._hashTable[index].value;
+    } else {
+      let current = this._hashTable[index].value
+      while (current) {
+        if (current.value === item) {
+          return current
+        }
+        current = current.next
+      }
   }
+  return this._hashTable[index].value;
+}
 
   set(key, value) {
     const loadRatio = (this.length + this._deleted + 1) / this._capacity;
@@ -37,15 +48,28 @@ class SCHashMap {
         node.next = this._hashTable[index]
       }
       
-    }
-
   }
 
-  delete(key) {
+  
+
+  delete({key, value}) {
     const index = this._findSlot(key);
     const slot = this._hashTable[index];
     if (slot === undefined) {
       throw new Error('Key error');
+    }
+    if (this._hashTable[index].value === {key, value}) {
+      this._hashTable[index] = this._hashTable[index].next
+    } else {
+      let current = this._hashTable[index].next
+      let prev = this._hashTable[index]
+      while (current) {
+        if (current.value === {key, value}) {
+          prev.next = current.next
+        }
+        prev = current
+        current = current.next
+      }
     }
     slot.DELETED = true;
     this.length--;
@@ -63,6 +87,38 @@ class SCHashMap {
         return index;
       }
     }
+  }
+
+  has(item) {
+    for(let i=0; i<this._hashTable.length; i++){
+      if( this._hashTable[i] ) {
+        let current = this._hashTable[i];
+        while( current ) {
+          if( current.data === item ) {
+            return true;
+          }
+          current = current.next;
+        }
+      }
+    }
+    return false;
+  }
+
+  size( item ) {
+    let counter = 0
+    for(let i=0; i<this._hashTable.length; i++){
+      if( this._hashTable[i] ) {
+        let current = this._hashTable[i]
+        while( current ) {
+          counter++
+          current = current.next
+        }
+      }
+    }
+    return counter
+  }
+  isEmpty() {
+    return this.size() < 1
   }
 
   _resize(size) {
